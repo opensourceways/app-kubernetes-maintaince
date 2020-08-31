@@ -1,0 +1,42 @@
+# Deployment for maintenance service
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: maintenance-server
+spec:
+  selector:
+    matchLabels:
+      app: maintenance-server
+  template:
+    metadata:
+      labels:
+        app: maintenance-server
+    spec:
+      containers:
+        - name: maintenance-server
+          image: swr.ap-southeast-1.myhuaweicloud.com/opensourceway/maintenance-server:fef669c8b570c34b58792eb571038155f7e1c763
+          resources:
+            requests:
+              cpu: 2000m
+              memory: 4000Mi
+          volumeMounts:
+            - mountPath: /home/ttyd/.kube
+              name: cluster-config-volume
+          env:
+            - name: TTYD_PORT
+              value: "8080"
+            - name: TTYD_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  key: ttyd_username
+                  name: cluster-config-secrets
+            - name: TTYD_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ttyd_password
+                  name: cluster-config-secrets
+      volumes:
+        - name: cluster-config-volume
+          secret:
+            secretName: cluster-config-secrets

@@ -1,2 +1,2 @@
-# app-kubernetes-maintaince
-This repo used to generate web based kubernetes cluster maintaince
+# app-kubernetes-maintenance
+This repo used to generate web based kubernetes cluster maintenance
