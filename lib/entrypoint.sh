@@ -9,4 +9,4 @@ do
   KUBECONFIG=${KUBECONFIG}${entry}:
 done
 export KUBECONFIG=${KUBECONFIG}
-ttyd --port ${TTYD_PORT} --credential ${TTYD_USERNAME}:${TTYD_PASSWORD}
+ttyd --port ${TTYD_PORT} --credential ${TTYD_USERNAME}:${TTYD_PASSWORD} zsh
