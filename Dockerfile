@@ -21,6 +21,9 @@ RUN curl -L https://github.com/derailed/k9s/releases/download/v0.21.7/k9s_Linux_
 # Install oh my zsh
 RUN sh -c "$(wget -O- https://raw.githubusercontent.com/deluan/zsh-in-docker/master/zsh-in-docker.sh)" -- -t robbyrussell
 
+# Install kubectl
+RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" && \
+    chmod +x kubectl && mv kubectl /usr/local/sbin
 # Install ttyd
 RUN curl -L https://github.com/tsl0922/ttyd/releases/download/1.6.1/ttyd_linux.x86_64 -o ttyd && \
     chmod +x ./ttyd && cp ./ttyd /usr/local/bin && rm ./ttyd
